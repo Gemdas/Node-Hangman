@@ -1,0 +1,22 @@
+{
+  "name": "node-hangman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gemdas/Node-Hangman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gemdas/Node-Hangman/issues"
+  },
+  "homepage": "https://github.com/Gemdas/Node-Hangman#readme",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  }
+}
