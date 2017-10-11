@@ -28,5 +28,10 @@ word = function (word) {
 		}
 		return true;
 	}
+	this.reset=function(){
+		this.board.forEach(function(letter){
+			letter.isSolved=false;
+		})
+	}
 }
 module.exports = word;

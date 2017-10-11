@@ -13,19 +13,25 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 	console.log("Thank you for your patience, our game can begin now");
 	var active= list[Math.floor(Math.random()*list.length)];
 	var lives=10;
+	var usedLetters= [];
 	console.log()
 	game();
+	function newGame(){
+		active= list[Math.floor(Math.random()*list.length)];
+		active.reset();
+		lives=10;
+		usedLetters= [];
+	}
 	function game(){
 		if(active.hasWon()){
+			console.log(active.displayWord());
 			console.log("You Solved it");
-			active= list[Math.floor(Math.random()*list.length)];
-			lives=10;
+			newGame();
 		}
 		if(lives===0)
 		{
 			console.log("Oh Better luck Next Time");
-			active= list[Math.floor(Math.random()*list.length)];
-			lives=10;
+			newGame();
 		}
 		console.log("");
 		console.log(active.displayWord());
@@ -37,8 +43,8 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 				name:"guess",
 			}
 		]).then(function(playerGuess){
-			if(/[a-z]/.test(playerGuess.guess)&&playerGuess.guess.length===1){
-				console.log(playerGuess.guess.indexOf(/^[a-z]+$/))
+			if(/[a-z]/.test(playerGuess.guess)&&playerGuess.guess.length===1&&usedLetters.indexOf(playerGuess.guess)===-1){
+				usedLetters.push(playerGuess.guess);
 				if(active.play(playerGuess.guess)){
 					console.log("CORRECT!");
 				}
