@@ -8,7 +8,7 @@ word = function (word) {
 	this.play =function(guess) {
 		var isCorrect = false;
 		for (var i = 0; i < this.board.length; i++) {
-			if(this.board[i].guess(guess))
+			if(!this.board[i].isSolved&&this.board[i].guess(guess))
 				isCorrect=true;
 		}
 		return isCorrect;
