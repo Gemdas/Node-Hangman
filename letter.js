@@ -1,4 +1,4 @@
-letter=function (letter) {
+Letter=function (letter) {
 	this.letter=letter;
 	this.isSolved=false;
 	this.guess= function(guess){
@@ -15,4 +15,4 @@ letter=function (letter) {
 		return "_ ";
 	}
 }
-module.exports = letter;
+module.exports = Letter;

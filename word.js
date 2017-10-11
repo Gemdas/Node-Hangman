@@ -1,9 +1,9 @@
-var letter=require("./letter.js");
-word = function (word) {
+var Letter=require("./letter.js");
+Word = function (word) {
 	this.board=word.split("");
 	
 	this.board.forEach(function(alpha, index, board) {
-		board[index]=new letter(alpha);
+		board[index]=new Letter(alpha);
 	});
 	this.play =function(guess) {
 		var isCorrect = false;
@@ -34,4 +34,4 @@ word = function (word) {
 		})
 	}
 }
-module.exports = word;
+module.exports = Word;

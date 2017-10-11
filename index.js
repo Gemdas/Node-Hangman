@@ -1,5 +1,5 @@
 var inquirer = require("inquirer");
-var word = require("./word.js");
+var Word = require("./word.js");
 var fs = require("fs");
 console.log("please hold while we create our 58109 words long wordlist")
 fs.readFile("wordlist.txt", "utf-8",function(error, data) {
@@ -8,7 +8,7 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 	}
 	list=data.split(/\r?\n/);
 	list.forEach(function(entry, index){
-		list[index]=new word(entry);
+		list[index]=new Word(entry);
 	})
 	console.log("Thank you for your patience, our game can begin now");
 	var active= list[Math.floor(Math.random()*list.length)];
@@ -28,8 +28,7 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 			console.log("You Solved it");
 			newGame();
 		}
-		if(lives===0)
-		{
+		if(lives===0){
 			console.log("Oh Better luck Next Time");
 			newGame();
 		}
