@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Gemdas/Node-Hangman#readme",
   "dependencies": {
-    "inquirer": "^3.3.0"
+    "inquirer": "^3.3.0",
+    "opn":"^5.1.0"
   }
 }

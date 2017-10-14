@@ -1,7 +1,8 @@
+console.log("please hold while we create our 58109 words long wordlist");
 var inquirer = require("inquirer");
 var Word = require("./word.js");
 var fs = require("fs");
-console.log("please hold while we create our 58109 words long wordlist")
+var opn = require("opn");
 fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 	if(error){
 		throw error;
@@ -23,15 +24,6 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 		usedLetters= [];
 	}
 	function game(){
-		if(active.hasWon()){
-			console.log(active.displayWord());
-			console.log("You Solved it");
-			newGame();
-		}
-		if(lives===0){
-			console.log("Oh Better luck Next Time");
-			newGame();
-		}
 		console.log("");
 		console.log(active.displayWord());
 		console.log("");
@@ -55,7 +47,80 @@ fs.readFile("wordlist.txt", "utf-8",function(error, data) {
 			else{
 				console.log("please input valid inputs (single lowercase letters)");
 			}
-			game();
+			if(active.hasWon()){
+				console.log(active.displayWord());
+				console.log("You Solved it");
+				inquirer.prompt([
+				{
+					type:"list",
+					message:"Which activity do you want me to do",
+					choices:["Play Again", "Exit", "That's not a word"],
+					name:"response",
+				}
+				]).then(function(response){
+					switch(response.response)
+					{
+						case "Play Again":{
+							newGame();
+							game();
+							break;
+						}
+						case "Exit":{
+							return;
+						}
+						case "That's not a word":{
+							opn("https://www.google.com/search?q="+active.displayWord().replace(/ /g,""),"_blank");
+							inquirer.prompt([
+							{
+								type:"list",
+								message:"Which activity do you want me to do",
+								choices:["Play Again", "Exit"],
+								name:"response",
+							}
+							]).then(function(response){
+								switch(response.response)
+								{
+									case "Play Again":{
+										newGame();
+										game();
+										break;
+									}
+									case "Exit":{
+										return;
+									}
+								}
+								})
+							}
+						}
+					})
+			}
+			else if(lives===0){
+				console.log("Oh Better luck Next Time");
+				newGame();
+				inquirer.prompt([
+				{
+					type:"list",
+					message:"Which activity do you want me to do",
+					choices:["Play Again", "Exit"],
+					name:"response",
+				}
+				]).then(function(response){
+					switch(response.response)
+					{
+						case "Play Again":{
+							newGame();
+							game();
+							break;
+						}
+						case "Exit":{
+							return;
+						}
+					}
+				})
+			}
+			else{
+				game();
+			}
 		})
 	}
 })
